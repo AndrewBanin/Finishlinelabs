@@ -37,9 +37,9 @@ Resources:
         - !Ref InstanceSecurityGroup
       KeyName: !Ref KeyName
       ImageId: !Ref AmiId
-       Tags: 
-          - Key: Name
-            Value: BaninaInstance
+      Tags: 
+        - Key: Name
+          Value: BaninaInstance
   InstanceSecurityGroup:
     Type: 'AWS::EC2::SecurityGroup'
     Properties:
