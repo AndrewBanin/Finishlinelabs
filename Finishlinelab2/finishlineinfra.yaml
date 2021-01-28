@@ -39,7 +39,7 @@ Resources:
       ImageId: !Ref AmiId 
       Tags:
         - Key: Name
-          Value: CokerInstance  
+          Value: BaninaInstance  
   InstanceSecurityGroup:
     Type: 'AWS::EC2::SecurityGroup'
     Properties:
@@ -52,14 +52,14 @@ Resources:
 Outputs:
   InstanceId:
     Description: InstanceId of the newly created EC2 instance
-    Value: !Ref CokerInstance
+    Value: !Ref BaninaInstance
   AZ:
     Description: Availability Zone of the newly created EC2 instance
     Value: !GetAtt 
-      - CokerInstance
+      - BaninaInstance
       - AvailabilityZone
   PublicDNS:
     Description: Public DNSName of the newly created EC2 instance
     Value: !GetAtt 
-      - CokerInstance
+      - BaninaInstance
       - PublicDnsName
