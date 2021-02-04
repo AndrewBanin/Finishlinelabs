@@ -74,4 +74,4 @@ Outputs:
     Value: !GetAtt 
       - BaninaInstance
       - PublicDnsName
-## test      
+## test   
