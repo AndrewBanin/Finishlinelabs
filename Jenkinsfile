@@ -7,14 +7,14 @@ pipeline {
         AWS_DEFAULT_REGION = ('us-east-1')
     }
     stages {
-        stage('AWS build') {
+        stage('Cloudformation build') {
             steps {
-                sh 'aws cloudformation create-stack --template-body file:///var/lib/jenkins/workspace/Finishlinelab2/Finishlinelab2/finishlinelabinfra.yml --stack-name BaninaInstance --parameter ParameterKey=KeyName,ParameterValue=finishlinelab ParameterKey=InstanceType,ParameterValue=t2.micro'
+                sh "aws cloudformation create-stack --template-body 'file:///var/lib/jenkins/workspace/Finishlinelab3_Finishlinelab3/finishlinelab3infra.yaml' --stack-name 'Finishlinelab3 --region 'us-east-1' --parameter ParameterKey=KeyName,ParameterValue=finishlinelab ParameterKey=InstanceType,ParameterValue=t2.micro'
             }
         }
         stage('Build') {
             steps {
-                echo 'Building..'
+                echo 'Buildings..'
             }
         }
         stage('Test') {
