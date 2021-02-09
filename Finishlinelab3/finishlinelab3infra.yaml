@@ -34,7 +34,7 @@ Resources:
     Properties:
       InstanceType: !Ref InstanceType
       SecurityGroups:
-        - !Ref InstanceSecurityGroup
+        - !Ref BaninaWebserverSG
       KeyName: !Ref KeyName
       ImageId: !Ref AmiId 
       Tags:
@@ -58,7 +58,7 @@ Resources:
     Properties:
       InstanceType: !Ref InstanceType
       SecurityGroups:
-        - !Ref InstanceSecurityGroup
+        - !Ref BaninaDBServerSG
       KeyName: !Ref KeyName
       ImageId: !Ref AmiId 
       Tags:
@@ -77,14 +77,14 @@ Resources:
 Outputs:
   InstanceId:
     Description: InstanceId of the newly created EC2 instance
-    Value: !Ref BaninaInstance
+    Value: !Ref BaninaWebServer
   AZ:
     Description: Availability Zone of the newly created EC2 instance
     Value: !GetAtt 
-      - BaninaInstance
+      - BaninaWebServer
       - AvailabilityZone
   PublicDNS:
     Description: Public DNSName of the newly created EC2 instance
     Value: !GetAtt 
-      - BaninaInstance
+      - BaninaWebServer
       - PublicIp
