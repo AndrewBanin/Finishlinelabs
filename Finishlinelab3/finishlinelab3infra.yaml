@@ -88,4 +88,3 @@ Outputs:
     Value: !GetAtt 
       - BaninaInstance
       - PublicIp
-   ###test
