@@ -12,9 +12,9 @@ Parameters:
     Type: 'AWS::EC2::KeyPair::KeyName'
     ConstraintDescription: must be the name of an existing EC2 KeyPair.
   InstanceType:
-    Description: JoeWordPress EC2 instance type
+    Description: BaninaWordPress EC2 instance type
     Type: String
-    Default: t2.micro
+    Default: t2.small
     AllowedValues:
     - t2.nano
     - t2.micro
@@ -64,11 +64,11 @@ Parameters:
     Type: String
     MinLength: '9'
     MaxLength: '18'
-    Default: 0.0.0.0/0
+    Default: 66.66.97.33/32
     AllowedPattern: '(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})/(\d{1,2})'
     ConstraintDescription: must be a valid IP CIDR range of the form x.x.x.x/x.
   DBName:
-    Default: wordpressdb
+    Default: wordpress
     Description: The WordPress database name
     Type: String
     MinLength: '1'
@@ -104,7 +104,7 @@ Parameters:
     Type: String
     Default: ami-0080e4c5bc078760e  
 Resources:
-  JoeWordPressSecurityGroup:
+  BaninaWordPressSecurityGroup:
     Type: 'AWS::EC2::SecurityGroup'
     Properties:
       GroupDescription: >-
@@ -119,7 +119,7 @@ Resources:
           FromPort: '22'
           ToPort: '22'
           CidrIp: !Ref SSHLocation
-  JoeWordPress:
+  BaninaWordPress:
     Type: 'AWS::EC2::Instance'
     Metadata:
       'AWS::CloudFormation::Init':
@@ -154,11 +154,11 @@ Resources:
                   - |
                     triggers=post.update
                   - |
-                    path=Resources.JoeWordPress.Metadata.AWS::CloudFormation::Init
+                    path=Resources.BaninaWordPress.Metadata.AWS::CloudFormation::Init
                   - 'action=/opt/aws/bin/cfn-init -v '
                   - '         --stack '
                   - !Ref 'AWS::StackName'
-                  - '         --resource JoeWordPress '
+                  - '         --resource BaninaWordPress '
                   - '         --configsets wordpress_install '
                   - '         --region '
                   - !Ref 'AWS::Region'
@@ -178,12 +178,12 @@ Resources:
         install_wordpress:
           packages:
             yum:
-              php73: []
-              php73-mysqlnd: []
-              mysql57: []
-              mysql57-server: []
-              mysql57-devel: []
-              mysql57-libs: []
+              php80: []
+              php80-mysqlnd: []
+              mysql80: []
+              mysql80-server: []
+              mysql80-devel: []
+              mysql80-libs: []
               httpd24: []
           sources:
             /var/www/html: 'http://wordpress.org/latest.tar.gz'
@@ -278,11 +278,11 @@ Resources:
       ImageId: !Ref AmiId
       InstanceType: !Ref InstanceType
       SecurityGroups:
-        - !Ref JoeWordPressSecurityGroup
+        - !Ref BaninaWordPressSecurityGroup
       KeyName: !Ref KeyName
       Tags:
         - Key: Name
-          Value: JoeWordPress
+          Value: BaninaWordPress
       UserData: !Base64 
         'Fn::Join':
           - ''
@@ -293,7 +293,7 @@ Resources:
             - '/opt/aws/bin/cfn-init -v '
             - '         --stack '
             - !Ref 'AWS::StackName'
-            - '         --resource JoeWordPress '
+            - '         --resource BaninaWordPress '
             - '         --configsets wordpress_install '
             - '         --region '
             - !Ref 'AWS::Region'
@@ -302,7 +302,7 @@ Resources:
             - '/opt/aws/bin/cfn-signal -e $? '
             - '         --stack '
             - !Ref 'AWS::StackName'
-            - '         --resource JoeWordPress '
+            - '         --resource BaninaWordPress '
             - '         --region '
             - !Ref 'AWS::Region'
             - |+
@@ -316,7 +316,7 @@ Outputs:
       - ''
       - - 'http://'
         - !GetAtt 
-          - JoeWordPress
+          - BaninaWordPress
           - PublicIp
         - /wordpress
     Description: WordPress Website
@@ -326,10 +326,10 @@ Outputs:
   AZ:
     Description: Availability Zone of the newly created EC2 instance
     Value: !GetAtt 
-      - JoeWordPress
+      - BaninaWordPress
       - AvailabilityZone
   PublicIP:
     Description: Public IP address of the newly created EC2 instance
     Value: !GetAtt 
-      - EC2Instance
+      - BaninaWordPress
       - PublicIp   
