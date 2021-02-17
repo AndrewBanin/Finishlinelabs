@@ -11,7 +11,7 @@ pipeline {
             steps {
                 stage('Cloudformation build') {
             steps {
-                sh "aws cloudformation create-stack --template-body 'file:///var/lib/jenkins/workspace/first-ci-pipeline_finishlinelab3/Finishlinelab3/finishlinelab3infra.yaml' --stack-name 'Finishlinelab3' --region 'us-east-1' --parameter ParameterKey=KeyName,ParameterValue=Finishlinelab ParameterKey=InstanceType,ParameterValue=t2.micro"
+                sh "aws cloudformation create-stack --template-body 'file:///var/lib/jenkins/workspace/Finishlinelab5/finishlinelab5/finishlinelab5infra.yml' --stack-name 'Finishlinelab5' --region 'us-east-1' --parameters 'file:///var/lib/jenkins/workspace/parameter.json'"
             }
         }
         stage('Build') {
