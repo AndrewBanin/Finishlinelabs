@@ -11,7 +11,7 @@ pipeline {
             steps {
                 stage('Cloudformation build') {
             steps {
-                sh "aws cloudformation create-stack --template-body 'file:///var/lib/jenkins/workspace/second_CI_pipeline_finishlinelab5/Finishlinelab5/finishlinelab5infra.yml' --stack-name 'Finishlinelab5' --region 'us-east-1' --parameters 'file:///var/lib/jenkins/workspace/parameter.json'"
+                sh "aws cloudformation create-stack --template-body 'file:///var/lib/jenkins/workspace/workspace.txt/finishlinelab5infra.yml' --stack-name 'Finishlinelab5' --region 'us-east-1' --parameters 'file:///var/lib/jenkins/workspace/parameter.json'"
             }
         }
         stage('Build') {
