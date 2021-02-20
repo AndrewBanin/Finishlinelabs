@@ -3,18 +3,20 @@ pipeline {
 
     environment {
         AWS_ACCESS_KEY_ID     = credentials('aws_jenkins_connection')
-        AWS_SECRET_ACCESS_KEY = credentials('aws_jenkins_coneection')
+        AWS_SECRET_ACCESS_KEY = credentials('aws_jenkins_connection')
         AWS_DEFAULT_REGION = ('us-east-1')
     }
     stages {
-        stage('Cloudformation') {
+        stage('AWS build') {
             steps {
-             sh "aws cloudformation create-stack --template-body file://var/lib/jenkins/workspace/FinishlineEC2_docker/finishlinelab2infra.yaml --stack-name BaninaInstance --parameters ParameterKey=KeyName,ParameterValue=Finishlinelab ParameterKey=InstanceType,ParameterValue=t2.micro"
+                stage('Cloudformation build') {
+            steps {
+                sh "aws cloudformation create-stack --template-body 'file:///var/lib/jenkins/workspace/Finishlinelab5/finishlinelab5/finishlinelab5infra.yml' --stack-name 'Finishlinelab5' --region 'us-east-1' --parameters 'file:///var/lib/jenkins/workspace/parameter.json'"
             }
         }
         stage('Build') {
             steps {
-                echo 'Buildings..'
+                echo 'Building..'
             }
         }
         stage('Test') {
