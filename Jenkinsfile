@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Cloudformation') {
             steps {
-             sh "aws cloudformation create-stack --template-body file://var/lib/jenkins/workspace/third_ci_pipeline_finishlineEC2/finishlinelab2infra.yaml --stack-name BaninaInstance --parameters ParameterKey=KeyName,ParameterValue=Finishlinelab ParameterKey=InstanceType,ParameterValue=t2.micro"
+             sh "aws cloudformation create-stack --template-body file://var/lib/jenkins/workspace/third_ci_pipeline_finishlineEC2/FinishlineEC2/finishlinelab2infra.yaml --stack-name BaninaInstance --parameters ParameterKey=KeyName,ParameterValue=Finishlinelab ParameterKey=InstanceType,ParameterValue=t2.micro"
             }
         }
         stage('Build') {
