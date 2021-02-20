@@ -62,4 +62,4 @@ Outputs:
     Description: Public DNSName of the newly created EC2 instance
     Value: !GetAtt 
       - BaninaInstance
-      - PublicDnsName
+      - PublicIp
