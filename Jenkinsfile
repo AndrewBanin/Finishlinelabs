@@ -8,7 +8,7 @@ pipeline {
     stages { 
        stage('Building our image') { 
             steps { 
-               dir ('/var/lib/jenkins/workspace/Andrew_Boutique_website1/staticWebsite') { 
+               dir ('staticWebsite') { 
                 script { 
                     dockerImage = docker.build registry + ":$BUILD_NUMBER" 
                   }

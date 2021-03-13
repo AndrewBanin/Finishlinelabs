@@ -1,0 +1,10 @@
+version: '3.3'
+services:
+   Banina-boutique:
+     image:banina/andrew-boutique: ${tag}
+     restart: always
+     ports:
+      -"80:80"
+networks:
+  banina
+  
