@@ -39,7 +39,7 @@ Resources:
       ImageId: !Ref AmiId 
       Tags:
         - Key: Name
-           Value: BaninaWebServer
+          Value: BaninaWebServer
       UserData:
         !Base64 |
         #!/bin/bash
