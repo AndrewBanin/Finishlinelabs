@@ -62,17 +62,17 @@ Resources:
          FromPort:  '22'
          ToPort:  '22'
          CidrIp: !Ref 'SSHLocation'
-  Outputs:
-    InstanceId:
-      Description: InstanceId of the newly created EC2 instance
-      Value: !Ref BaninaWebServer
-    AZ:
-      Description: Availability Zone of the newly created EC2 instance
-      Value: !GetAtt 
-        - BaninaWebServer
-        - AvailabilityZone
-    PublicDNS:
-      Description: Public DNSName of the newly created EC2 instance
-      Value: !GetAtt 
-        - BaninaWebServer
-        - PublicIp
+Outputs:
+  InstanceId:
+    Description: InstanceId of the newly created EC2 instance
+    Value: !Ref BaninaWebServer
+  AZ:
+    Description: Availability Zone of the newly created EC2 instance
+    Value: !GetAtt 
+      - BaninaWebServer
+      - AvailabilityZone
+  PublicDNS:
+    Description: Public DNSName of the newly created EC2 instance
+    Value: !GetAtt 
+      - BaninaWebServer
+      - PublicIp
