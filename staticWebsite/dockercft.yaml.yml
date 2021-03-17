@@ -33,7 +33,7 @@ Resources:
     Properties:
       InstanceType: !Ref InstanceType
       SecurityGroups:
-        - !Ref BaninaWebSecurityGroup
+        - !Ref BaninaWebServerSG
       KeyName: !Ref KeyName
       ImageId: !Ref AmiId 
       Tags:
@@ -43,13 +43,13 @@ Resources:
         !Base64 |
         #!/bin/bash
         yum update -y
-        amazon-linux-extras install docker -y
-        systemctl start docker
+        yum install docker -y
+        service docker start 
         usermod -a -G docker ec2-user
-        systemctl enable docker
+        service docker enable
         curl -L https://github.com/docker/compose/releases/download/1.28.5/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
         chmod +x /usr/local/bin/docker-compose
-  CokerWebServerSG:
+  BaninaWebServerSG:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: Enable HTTP access via port 80 and SSH access
